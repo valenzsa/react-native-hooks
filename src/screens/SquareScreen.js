@@ -10,18 +10,43 @@ const SquareScreen = () => {
   const [blue, setBlue] = useState(0);
 
   console.log(`red is ${red}`);
+  console.log(`green is ${green}`);
+  console.log(`blue is ${blue}`);
 
   //Helper function
   const setColor = (color, change) => {
     // color === 'red', 'green', 'blue'
     // change === +15, -15
 
-    if(color === 'red') {
-      if(red + change > 255 || red + change < 0 ) {
+    // if(color === 'red') {
+    //   if(red + change > 255 || red + change < 0 ) {
+    //     return;
+    //   } else {
+    //     setRed(red + change);
+    //   }
+    // }
+
+    // USING SWITCH STATEMENT
+    switch(color) {
+      case 'red':
+        // if(red + change > 255 || red + change < 0 ) {
+        //   return;
+        // } else {
+        //   setRed(red + change);
+        // }
+        // return;
+
+        // USING TERNARY OPERATOR
+        red + change > 255 || red + change < 0 ? null : setRed(red + change);
         return;
-      } else {
-        setRed(red + change);
-      }
+      case 'green':
+        green + change > 255 || green + change < 0 ? null : setGreen(green + change);
+        return;
+      case 'blue':
+        blue + change > 255 || blue + change < 0 ? null : setBlue(blue + change);
+        return;
+      default:
+        return;
     }
   }
 
@@ -36,7 +61,6 @@ const SquareScreen = () => {
           //setRed(red + COLOR_INCREMENT)
 
           setColor('red', COLOR_INCREMENT);
-          console.log(red);
         }}
         onDecrease={() => {
           // if(red - COLOR_INCREMENT < 255) {
@@ -45,29 +69,24 @@ const SquareScreen = () => {
           //setRed(red - COLOR_INCREMENT)
           // setColor('red', -1 * COLOR_INCREMENT);
           setColor('red', -(COLOR_INCREMENT));
-          console.log(red);
         }}
       />
       <ColorCounter 
         color="Green" 
         onIncrease={() => {
-          setGreen(green + COLOR_INCREMENT);
-          console.log(green);
+          setColor('green', COLOR_INCREMENT);
         }}  
         onDecrease={() => {
-          setGreen(green - COLOR_INCREMENT);
-          console.log(green);
+          setColor('green', -(COLOR_INCREMENT));
         }}
       />
       <ColorCounter 
         color="Blue"
         onIncrease={() => {
-          setBlue(blue + COLOR_INCREMENT);
-          console.log(blue);
+          setColor('blue', COLOR_INCREMENT);
         }}
         onDecrease={() => {
-          setBlue(blue - COLOR_INCREMENT);
-          console.log(blue);
+          setColor('blue', -(COLOR_INCREMENT));
         }}
       />
       <View style={
